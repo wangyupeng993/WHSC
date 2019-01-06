@@ -1,0 +1,38 @@
+<template>
+    <section>
+      <el-scrollbar wrap-class="scrollbar-wrapper">
+        <el-menu
+          :show-timeout="200"
+          :default-active="$route.path"
+          router
+          mode="vertical"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+        >
+          <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path"/>
+        </el-menu>
+      </el-scrollbar>
+    </section>
+</template>
+
+<script>
+import SidebarItem from '../Sidebar/SidebarItem'
+export default {
+  name: 'Sidebar',
+  data () {
+    return {}
+  },
+  components: {SidebarItem},
+  computed: {
+    routes () {
+      return this.$router.options.routes
+    }
+  },
+  created () {},
+  mounted () {},
+  methods: {}
+}
+</script>
+
+<style scoped></style>
