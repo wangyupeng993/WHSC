@@ -1,7 +1,7 @@
 import axios from 'axios'
 import queryString from 'queryString'
 import md5 from 'js-md5'
-import CryptoJs from '@/api/crypto'
+// import CryptoJs from '@/api/crypto'
 import { Message } from 'element-ui'
 
 // 取消请求配置
@@ -21,9 +21,8 @@ const service = axios.create({
   }],
   // 后端返回数据
   transformResponse: [ResponseData => {
-    if (ResponseData && ResponseData.result) {
-      console.log(ResponseData.result.token, '未加密')
-      ResponseData.result.token = CryptoJs.encrypt(ResponseData.result.token, 'Nw6thPsMpO5fg')
+    if (ResponseData && ResponseData.result && ResponseData.result.token) {
+      ResponseData.result.token = md5(ResponseData.result.token)
     }
     return ResponseData
   }]
@@ -58,7 +57,14 @@ service.interceptors.response.use(response => {
   }
   return response
 }, error => {
-  console.log(error)
+  const timeout = error.toString().split(' ').filter(item => item === 'timeout')
+  if (timeout && timeout != null && timeout.join() !== '') {
+    Message({
+      message: '请求超时！',
+      type: 'error',
+      duration: 5 * 1000
+    })
+  }
   // 请求响应后失败拦截
   return Promise.reject(error)
 })

@@ -11,8 +11,20 @@ export const constantRouterMap = [
     hidden: true
   }, {
     path: '/',
-    name: 'Layout',
-    component: Layout
+    component: Layout,
+    redirect: 'News',
+    meta: {title: '新闻管理'},
+    children: [{
+      path: '',
+      name: 'Sort',
+      component: () => import('@/views/News/sort'),
+      meta: {title: '分类管理'}
+    }, {
+      path: 'article',
+      name: 'Article',
+      component: () => import('@/views/News/article'),
+      meta: {title: '文章管理'}
+    }]
   }, {
     path: '/404',
     component: () => import('@/views/404/index'),

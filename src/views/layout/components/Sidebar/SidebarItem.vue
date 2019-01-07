@@ -4,16 +4,18 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <!--<template slot="title">
-          <span>{{item.meta.title}}</span>
-        </template>-->
-        <!--<el-menu-item-group v-for="(items,index) in item.children" :key="index">-->
-          <!--<el-submenu :index="items.path" v-if="items.children">-->
-            <!--<template slot="title">{{items.meta.title}}</template>-->
-            <!--<el-menu-item v-for="(itemslen,index) in items.children" :key="index" :index="itemslen.path">{{itemslen.meta.title}}</el-menu-item>-->
-          <!--</el-submenu>-->
-          <!--<el-menu-item v-else :index="items.path">{{items.meta.title}}</el-menu-item>-->
-        <!--</el-menu-item-group>-->
+        <el-submenu :index="item.path">
+          <template slot="title">
+            <span>{{item.meta.title}}</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item v-for="child in item.children" :key="child.name" :index="child.path">
+              <router-link :to="'/'+child.path" tag="span" exact>
+                {{child.meta.title}}
+              </router-link>
+            </el-menu-item>
+          </el-menu-item-group>
+        </el-submenu>
       </el-menu>
     </section>
 </template>

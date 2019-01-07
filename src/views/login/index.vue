@@ -89,7 +89,7 @@ export default {
     this.getbase64()
   },
   mounted () {
-    console.log(this.$store.state.uesr.info)
+    console.log(this.$router.options.routes)
   },
   methods: {
     getbase64 () {
