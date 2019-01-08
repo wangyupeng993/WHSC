@@ -9,7 +9,7 @@
             <span>{{item.meta.title}}</span>
           </template>
           <el-menu-item-group>
-            <el-menu-item v-for="child in item.children" :key="child.name" :index="child.path">
+            <el-menu-item v-for="child in item.children" v-if="!child.hidden" :key="child.name" :index="child.path">
               <router-link :to="'/'+child.path" tag="span" exact>
                 {{child.meta.title}}
               </router-link>

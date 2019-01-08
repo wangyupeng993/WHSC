@@ -13,6 +13,20 @@ const service = {
       method: 'post',
       data
     })
+  },
+  getArticleall: (data) => {
+    return request({
+      url: '/flyCmsNews/article/admin/queryArticle',
+      method: 'post',
+      data
+    })
+  },
+  getSortquery (data) {
+    return request({
+      url: '/flyCmsNews/articleCategory/admin/query',
+      method: 'post',
+      data
+    })
   }
 }
 

@@ -77,7 +77,7 @@ export default {
         password: [{ validator: validatePass, trigger: 'blur' }],
         checkcode: [{ validator: validataCheck, trigger: 'blur' }]
       },
-      checkImg: ''
+      checkImg: 'data:image/jpg;base64,'
     }
   },
   components: {
@@ -88,13 +88,11 @@ export default {
   created () {
     this.getbase64()
   },
-  mounted () {
-    console.log(this.$router.options.routes)
-  },
+  mounted () {},
   methods: {
     getbase64 () {
       service.getbase64().then(respone => {
-        this.checkImg = 'data:image/jpg;base64,' + respone.data.result.imgCode
+        this.checkImg += respone.data.result.imgCode
         this.ruleForm.imgToken = respone.data.result.imgToken
       }).catch(error => {
         console.log(error)
@@ -105,7 +103,6 @@ export default {
       this.buttonload = true
       service.login(this.ruleForm).then(responent => {
         this.buttonload = false
-        console.log(responent.data)
         if (responent.data.resp_code.toString() === '000000') {
           setStorage('userinfo', responent.data.result)
           this.$router.push('/')

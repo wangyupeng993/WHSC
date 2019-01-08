@@ -5,10 +5,10 @@
     </el-aside>
     <el-main>
       <el-header>
-        <el-dropdown trigger="click">
+        <el-dropdown @command="removeStorage" trigger="click">
           <img :src="headImg" alt="头像" />
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item command='退出'>退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -19,7 +19,7 @@
 
 <script>
 import {Sidebar, AppMain} from './components'
-import {getUserInfo} from '../../utils/auth'
+import {getUserInfo, removeStorage} from '@/api/sessionStorage'
 
 export default {
   name: 'Layout',
@@ -32,10 +32,15 @@ export default {
       return getUserInfo().headImgUrl
     }
   },
-  mounted () {
-    // window.sessionStorage.removeItem('userinfo')
-  },
-  methods: {}
+  mounted () {},
+  methods: {
+    removeStorage (command) {
+      if (command === '退出') {
+        removeStorage('userinfo')
+        window.location.reload()
+      }
+    }
+  }
 }
 </script>
 

@@ -1,13 +1,12 @@
 import axios from 'axios'
 import queryString from 'queryString'
 import md5 from 'js-md5'
-// import CryptoJs from '@/api/crypto'
+import {getUserInfo} from '@/api/sessionStorage'
 import { Message } from 'element-ui'
 
 // 取消请求配置
 /* const CancelToken = axios.CancelToken
 const source = CancelToken.source() */
-
 const service = axios.create({
   baseURL: 'http://localhost:8080',
   timeout: 5000,
@@ -21,9 +20,9 @@ const service = axios.create({
   }],
   // 后端返回数据
   transformResponse: [ResponseData => {
-    if (ResponseData && ResponseData.result && ResponseData.result.token) {
+    /* if (ResponseData && ResponseData.result && ResponseData.result.token) {
       ResponseData.result.token = md5(ResponseData.result.token)
-    }
+    } */
     return ResponseData
   }]
   // cancelToken: source.token  取消请求
@@ -31,6 +30,7 @@ const service = axios.create({
 // 请求前拦截
 service.interceptors.request.use(config => {
   // 在发送请求之前做某事 拦截
+  config.headers['token'] = getUserInfo() === null ? '' : getUserInfo().token
   return config
 }, error => {
   // 请求错误时做莫事

@@ -18,6 +18,14 @@ module.exports = {
         'pathRewrite':{
           '^/flyCmsSystem':'/flyCmsSystem'
         }
+      },
+      '/flyCmsNews':{
+        target:'http://192.168.1.109:80',//测试环境
+        'secure':false,//false是为http协议
+        'changeOrigin':true,//允许跨域
+        'pathRewrite':{
+          '^/flyCmsNews':'/flyCmsNews'
+        }
       }
     },
 
