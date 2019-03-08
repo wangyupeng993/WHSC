@@ -1,13 +1,5 @@
 <template>
-  <el-row id="Editor">
-    <el-col :span="24">
-      <div ref="editor"></div>
-      <div class="upload-botton">
-        <el-button @click="getEditorContent" type="primary">上传编辑内容</el-button>
-        <el-button type="primary">上传视频</el-button>
-      </div>
-    </el-col>
-  </el-row>
+  <el-row id="Editor"></el-row>
 
 </template>
 

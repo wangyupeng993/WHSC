@@ -1,36 +1,37 @@
 <template>
-  <el-container>
-    <el-aside width="250px">
+  <el-container id="container">
+    <el-header>
+      <el-dropdown @command="removeStorage" trigger="click">
+        <img :src="headImg" alt="头像" />
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command='退出'>退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </el-header>
+    <el-container>
       <sidebar></sidebar>
-    </el-aside>
-    <el-main>
-      <el-header>
-        <el-dropdown @command="removeStorage" trigger="click">
-          <img :src="headImg" alt="头像" />
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command='退出'>退出</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </el-header>
-      <app-main></app-main>
-    </el-main>
+      <el-main>
+        <app-main></app-main>
+      </el-main>
+    </el-container>
   </el-container>
 </template>
 
 <script>
 import {Sidebar, AppMain} from './components'
-import {getUserInfo, removeStorage} from '@/api/sessionStorage'
+import {removeStorage} from '@/api/sessionStorage'
+import headImg from '@/assets/images/user.png'
 
 export default {
   name: 'Layout',
   data () {
-    return {}
+    return {headImg}
   },
   components: {Sidebar, AppMain},
   computed: {
-    headImg () {
+    /* headImg () {
       return getUserInfo().headImgUrl
-    }
+    } */
   },
   mounted () {},
   methods: {
@@ -43,33 +44,3 @@ export default {
   }
 }
 </script>
-
-<style rel="stylesheet/css" lang="css">
-  .el-aside {
-    height:100vh;
-    background-color: #545c64;
-  }
-  .el-main,.el-header{
-    padding:0;
-  }
-  .el-header{
-    line-height:60px;
-    background-color:#ffffff;
-    border-bottom: solid 1px #e6e6e6
-  }
-  .el-dropdown{
-    float:right;
-    width: 80px;
-    height:60px;
-    text-align: center;
-  }
-  .el-dropdown img{
-    width:40px;
-    height:40px;
-    border-radius:6px;
-    -webkit-border-radius:6px;
-    cursor: pointer;
-    margin-top:10px;
-  }
-
-</style>

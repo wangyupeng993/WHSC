@@ -8,7 +8,7 @@ import { Message } from 'element-ui'
 /* const CancelToken = axios.CancelToken
 const source = CancelToken.source() */
 const service = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'http://localhost:8082',
   timeout: 5000,
   responseType: 'json',
   // 向后端发送请求数据
@@ -16,7 +16,7 @@ const service = axios.create({
     if (RequestData && RequestData.passWord) {
       RequestData.passWord = md5(RequestData.passWord)
     }
-    return queryString.stringify(RequestData)
+    return RequestData && RequestData.append ? RequestData : queryString.stringify(RequestData)
   }],
   // 后端返回数据
   transformResponse: [ResponseData => {
@@ -40,7 +40,7 @@ service.interceptors.request.use(config => {
 // 请求响应后拦截
 service.interceptors.response.use(response => {
   // 请求响应后成功拦截 resp_code resp_message
-  if (response.data.resp_code.toString() === '000000') {
+  if (response.data.resp_code.toString() === '000000' && response.data.result && response.data.result !== null) {
     Message({
       message: response.data.resp_message,
       type: 'success',

@@ -10,12 +10,14 @@ export const constantRouterMap = [
     component: () => import('@/views/login/index'),
     hidden: true
   }, {
-    path: '/',
+    path: '',
+    redirect: '/News/sort'
+  }, {
+    path: '/News',
     component: Layout,
-    redirect: 'News',
     meta: {title: '新闻管理', Active: 'News-1'},
     children: [{
-      path: '',
+      path: 'sort',
       name: 'Sort',
       component: () => import('@/views/News/Sort/sort'),
       meta: {title: '分类管理', Active: 'News-1-1'}

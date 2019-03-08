@@ -1,0 +1,119 @@
+body,div,h1,h2,h3,h4,h5,p,ul,ol,p{
+  padding:0;
+  margin:0;
+  font-family:"Helvetica";
+  -webkit-text-size-adjust:100%;
+}
+
+li{
+  padding:0;
+  margin:0;
+  list-style:none;
+}
+
+h1,h2,h3,h4,h5{
+  font-weight:normal;
+}
+
+a{
+  text-decoration:none;
+}
+
+.el-scrollbar .el-scrollbar__wrap{
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+}
+
+.el-aside {
+  height:100vh;
+}
+.el-main,.el-header{
+  padding:0;
+}
+.el-header{
+  line-height:98px;
+  background-color:rgb(48, 65, 86);
+}
+.el-dropdown{
+  float:right;
+  width: 80px;
+  height:98px;
+  text-align: center;
+}
+.el-dropdown img{
+  width:40px;
+  height:40px;
+  border-radius:6px;
+  -webkit-border-radius:6px;
+  cursor: pointer;
+  margin-top:10px;
+}
+
+#container{
+  height:100vh;
+}
+
+#container .el-scrollbar{
+  background-color:rgb(48, 65, 86);
+}
+
+.login-container{
+  display:flex;
+  width:100vw;
+  height:100vh;
+  background:url(../images/timg.jpg) no-repeat center center;
+  background-size:cover;
+}
+.login-container .el-input input{
+  background: transparent;
+  border:none;
+  border-radius:0px;
+  color:#ffffff;
+}
+.login-container .el-form-item .form-item-flex{
+  display: -webkit-flex;
+  display:flex;
+  line-height: 40px;
+  flex-wrap: nowrap;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+.login-container .title {
+  font-size: 26px;
+  font-weight: 400;
+  color: #fff;
+  margin: 0px auto 40px auto;
+  text-align: center;
+  font-weight: bold;
+}
+.login-container .login-form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 380px;
+  max-width: 100%;
+  padding: 35px 35px 15px 35px;
+  margin: 120px auto;
+}
+.login-container .svg-container {
+  color: #889AA4;
+  vertical-align: middle;
+  width: 30px;
+  display: inline-block;
+}
+.login-container .svg-container .svg-icon{
+  width: 1.5rem;
+  height: 1.5rem;
+  vertical-align: -0.35rem;
+  /* fill: currentColor;*/
+  overflow: hidden;
+  margin-left: 10px;
+}
+.login-container  .el-form-item__content i{
+  display:inline-block;
+  line-height:40px;
+  font-size:20px;
+  padding-left:10px;
+  color:rgba(255,255,255,1);
+}

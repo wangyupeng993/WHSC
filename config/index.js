@@ -11,27 +11,19 @@ module.exports = {
     assetsPublicPath: '/',
     //反向代理配置
     proxyTable: {
-      '/flyCmsSystem':{
-        target:'http://192.168.1.125:80',//测试环境
+      '/smartmerchant':{
+        target:'http://47.105.47.163',//测试环境
         'secure':false,//false是为http协议
         'changeOrigin':true,//允许跨域
         'pathRewrite':{
-          '^/flyCmsSystem':'/flyCmsSystem'
-        }
-      },
-      '/flyCmsNews':{
-        target:'http://192.168.1.109:80',//测试环境
-        'secure':false,//false是为http协议
-        'changeOrigin':true,//允许跨域
-        'pathRewrite':{
-          '^/flyCmsNews':'/flyCmsNews'
+          '^/smartmerchant':'/smartmerchant'
         }
       }
     },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8082, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: true,
