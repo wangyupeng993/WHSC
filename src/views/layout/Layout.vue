@@ -1,8 +1,17 @@
 <template>
   <el-container id="container">
     <el-header>
+      <div class="el-header-logo">
+        <div>
+          <img src="@/assets/images/logo.jpg" alt="logo" />
+          <strong>中联支付</strong>
+        </div>
+      </div>
       <el-dropdown @command="removeStorage" trigger="click">
-        <img :src="headImg" alt="头像" />
+        <div>
+          <img :src="headImg" alt="头像" />
+          <span>用户名称</span>
+        </div>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command='退出'>退出</el-dropdown-item>
         </el-dropdown-menu>
@@ -11,7 +20,9 @@
     <el-container>
       <sidebar></sidebar>
       <el-main>
-        <app-main></app-main>
+        <el-scrollbar style="height:100%;background-color:#fff;">
+          <app-main></app-main>
+        </el-scrollbar>
       </el-main>
     </el-container>
   </el-container>

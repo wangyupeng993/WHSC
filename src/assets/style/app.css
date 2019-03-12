@@ -19,34 +19,91 @@ a{
   text-decoration:none;
 }
 
+.pagination-pos-bottom{
+  position:absolute;
+  bottom:0;
+  z-index:9999;
+  background-color:#fff;
+}
+
+#app,.el-main{
+  overflow: hidden;
+}
+.app-main{
+  height:100%;
+  overflow: auto;
+}
 .el-scrollbar .el-scrollbar__wrap{
   overflow-y: scroll !important;
   overflow-x: hidden !important;
+}
+.el-main{
+  position: relative;
+  height:93.7vh;
+  padding:20px 0 20px 20px;
 }
 
 .el-aside {
   height:100vh;
 }
-.el-main,.el-header{
+.el-header{
   padding:0;
 }
 .el-header{
-  line-height:98px;
   background-color:rgb(48, 65, 86);
+}
+.el-header .el-header-logo{
+  display:inline-block;
+  width:220px;
+  height:60px;
+  line-height:60px;
+  color:#fff;
+  text-align: center;
+  background-color:#222d32;
+}
+.el-header .el-header-logo div{
+  display:inline-block;
+}
+.el-header .el-header-logo div > img{
+  float:left;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  margin-top:5px;
+}
+.el-header .el-header-logo div > strong{
+  float:right;
+  padding:0 15px;
 }
 .el-dropdown{
   float:right;
-  width: 80px;
-  height:98px;
+  line-height:60px;
+  height:60px;
   text-align: center;
 }
-.el-dropdown img{
+.el-dropdown div {
+  height:60px !important;
+}
+.el-dropdown div > img{
   width:40px;
   height:40px;
   border-radius:6px;
   -webkit-border-radius:6px;
   cursor: pointer;
   margin-top:10px;
+}
+.el-dropdown div > span{
+  float:right;
+  padding:0 15px;
+  color:#fff;
+  cursor: pointer;
+}
+
+.menu-wrapper .el-submenu__title i.fas,
+.menu-wrapper .el-submenu__title i.fab,
+.menu-wrapper .el-menu-item i{
+  font-size:18px;
+  margin-right:10px;
 }
 
 #container{
@@ -63,6 +120,7 @@ a{
   height:100vh;
   background:url(../images/timg.jpg) no-repeat center center;
   background-size:cover;
+  align-items: center;
 }
 .login-container .el-input input{
   background: transparent;
@@ -94,7 +152,8 @@ a{
   width: 380px;
   max-width: 100%;
   padding: 35px 35px 15px 35px;
-  margin: 120px auto;
+  margin:-70px auto;
+  background-color:rgba(255,255,255,0.2);
 }
 .login-container .svg-container {
   color: #889AA4;
@@ -116,4 +175,14 @@ a{
   font-size:20px;
   padding-left:10px;
   color:rgba(255,255,255,1);
+}
+
+.demo-table-expand .el-form-item{
+  margin-right:0;
+  margin-bottom:0;
+  width:49%;
+}
+.demo-table-expand label{
+  width:120px;
+  color:#99a9bf;
 }

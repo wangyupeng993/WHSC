@@ -1,7 +1,7 @@
 import axios from 'axios'
 import queryString from 'queryString'
 import md5 from 'js-md5'
-import {getUserInfo} from '@/api/sessionStorage'
+// import {getUserInfo} from '@/api/sessionStorage'
 import { Message } from 'element-ui'
 
 // 取消请求配置
@@ -30,7 +30,7 @@ const service = axios.create({
 // 请求前拦截
 service.interceptors.request.use(config => {
   // 在发送请求之前做某事 拦截
-  config.headers['token'] = getUserInfo() === null ? '' : getUserInfo().token
+  // config.headers['token'] = getUserInfo() === null ? '' : getUserInfo().token
   return config
 }, error => {
   // 请求错误时做莫事
@@ -41,11 +41,13 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(response => {
   // 请求响应后成功拦截 resp_code resp_message
   if (response.data.resp_code.toString() === '000000' && response.data.result && response.data.result !== null) {
-    Message({
-      message: response.data.resp_message,
-      type: 'success',
-      duration: 2 * 1000
-    })
+    if (!response.data.result.img) {
+      Message({
+        message: response.data.resp_message,
+        type: 'success',
+        duration: 2 * 1000
+      })
+    }
   }
 
   if (response.data.resp_code.toString() !== '000000') {

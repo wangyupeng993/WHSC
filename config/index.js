@@ -12,13 +12,21 @@ module.exports = {
     //反向代理配置
     proxyTable: {
       '/smartmerchant':{
-        target:'http://47.105.47.163',//测试环境
+        target:'http://192.168.1.125:80',//测试环境
         'secure':false,//false是为http协议
         'changeOrigin':true,//允许跨域
         'pathRewrite':{
           '^/smartmerchant':'/smartmerchant'
         }
-      }
+      },
+      '/smartsystem':{
+        target:'http://192.168.1.125:80',//测试环境
+        'secure':false,//false是为http协议
+        'changeOrigin':true,//允许跨域
+        'pathRewrite':{
+          '^/smartsystem':'/smartsystem'
+        }
+      },
     },
 
     // Various Dev Server settings

@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     handleSizeChange (page) {
-      this.$emit('handle-change', page)
+      this.$emit('handle-change', {number: page, size: this.pageSize})
     }
   }
 }

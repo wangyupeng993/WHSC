@@ -2,12 +2,14 @@
     <section v-if="!item.hidden&&item.children" class="menu-wrapper">
       <el-submenu :index="item.path">
         <template slot="title">
+          <i :class="item.meta.icon"></i>
           <span>{{item.meta.title}}</span>
         </template>
         <el-menu-item-group>
           <el-menu-item v-for="child in item.children" v-if="!child.hidden" :key="child.name" :index="item.path + '/'+ child.path">
             <template slot="title">
-              {{child.meta.title}}
+              <i :class="child.meta.icon"></i>
+              <span>{{child.meta.title}}</span>
             </template>
           </el-menu-item>
         </el-menu-item-group>

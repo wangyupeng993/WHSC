@@ -5,25 +5,25 @@
       <el-form-item prop="username">
         <div class="form-item-flex">
           <i class="fas fa-home"></i>
-          <el-input type="text" v-model="ruleForm.adminName" name="username" autocomplete="off" placeholder="请输入商家账号"></el-input>
+          <el-input type="text" v-model="ruleForm.login_id" name="username" autocomplete="off" placeholder="请输入商家账号"></el-input>
         </div>
       </el-form-item>
       <el-form-item prop="password">
         <div class="form-item-flex">
           <i class="fas fa-key"></i>
-          <el-input type="password" v-model="ruleForm.passWord" name="password" autocomplete="off" placeholder="请输入商家密码"></el-input>
+          <el-input type="password" v-model="ruleForm.login_pass" name="password" autocomplete="off" placeholder="请输入商家密码"></el-input>
         </div>
       </el-form-item>
       <el-form-item prop="googleCode">
         <div class="form-item-flex">
           <i class="fas fa-unlock-alt"></i>
-          <el-input type="text" v-model="ruleForm.googleCode" name="googleCode" placeholder="请输入google验证码"></el-input>
+          <el-input type="text" v-model="ruleForm.smsCode" name="googleCode" placeholder="请输入google验证码"></el-input>
         </div>
       </el-form-item>
       <el-form-item prop="imagecode">
         <div class="form-item-flex">
           <i class="fas fa-qrcode"></i>
-          <el-input type="text" v-model="ruleForm.imageCode" name="imagecode" placeholder="请输入图形验证码"></el-input>
+          <el-input type="text" v-model="ruleForm.validCode" name="imagecode" placeholder="请输入图形验证码"></el-input>
           <img @click="getbase64" :src=checkImg alt="" />
         </div>
       </el-form-item>
@@ -42,28 +42,28 @@ export default {
   name: 'Login',
   data () {
     const validateUsername = (rule, value, callback) => {
-      if (this.ruleForm.adminName === '') {
+      if (this.ruleForm.login_id === '') {
         return callback(new Error('商家账号不能为空！'))
       } else {
         callback()
       }
     }
     const validatePass = (rule, value, callback) => {
-      if (this.ruleForm.passWord === '') {
+      if (this.ruleForm.login_pass === '') {
         return callback(new Error('商家密码不能为空！'))
       } else {
         callback()
       }
     }
     const validataGoogle = (rule, value, callback) => {
-      if (this.ruleForm.googleCode === '') {
+      if (this.ruleForm.smsCode === '') {
         return callback(new Error('google验证码不能为空！'))
       } else {
         callback()
       }
     }
     const validataImage = (rule, value, callback) => {
-      if (this.ruleForm.imageCode === '') {
+      if (this.ruleForm.validCode === '') {
         return callback(new Error('图形验证码不能为空！'))
       } else {
         callback()
@@ -73,10 +73,10 @@ export default {
       labelPosition: 'right',
       buttonload: false,
       ruleForm: {
-        adminName: '',
-        passWord: '',
-        googleCode: '',
-        imageCode: '',
+        login_id: '',
+        login_pass: '',
+        validCode: '',
+        smsCode: '',
         imgToken: ''
       },
       loginRules: {
@@ -85,30 +85,34 @@ export default {
         googleCode: [{ validator: validataGoogle, trigger: 'blur' }],
         imagecode: [{ validator: validataImage, trigger: 'blur' }]
       },
-      checkImg: 'data:image/jpg;base64,'
+      checkImg: null
     }
   },
-  created () {
+  mounted () {
     this.getbase64()
+    document.onkeydown = this.keyDown
   },
-  mounted () {},
   methods: {
     getbase64 () {
       service.getbase64()
         .then(respone => {
-          this.checkImg += respone.data.result.imgCode
-          this.ruleForm.imgToken = respone.data.result.imgToken
+          this.checkImg = `data:image/jpg;base64,${respone.data.result.img}`
+          this.ruleForm.imgToken = respone.data.result.code
         })
         .catch(error => {
           console.log(error)
         })
     },
     async handleLogin () {
-      if (this.ruleForm.adminName === '' || this.ruleForm.passWord === '' || this.ruleForm.validCode === '') return
+      if (this.ruleForm.login_id === '' || this.ruleForm.login_pass === '' || this.ruleForm.validCode === '') return
       this.buttonload = true
       await service.login(this.ruleForm)
         .then(responent => {
           this.buttonload = false
+          setStorage('userinfo', responent.data.result)
+          if (responent.data.resp_code.toString() === '999999') {
+
+          }
           if (responent.data.resp_code.toString() === '000000') {
             setStorage('userinfo', responent.data.result)
             this.$router.push('/')
@@ -119,6 +123,11 @@ export default {
           console.log(error)
         })
       await this.getbase64()
+    },
+    keyDown (e) {
+      if (e.key === 'Enter' && window.event.keyCode === 13) {
+        this.handleLogin()
+      }
     }
   }
 }

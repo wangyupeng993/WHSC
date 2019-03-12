@@ -8,7 +8,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/style/app.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import locale from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale/lang/zh-CN'
 import '@/permission'
 
 Vue.use(ElementUI, {locale})
