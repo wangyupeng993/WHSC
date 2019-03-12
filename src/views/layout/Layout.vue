@@ -20,7 +20,7 @@
     <el-container>
       <sidebar></sidebar>
       <el-main>
-        <el-scrollbar style="height:100%;background-color:#fff;">
+        <el-scrollbar>
           <app-main></app-main>
         </el-scrollbar>
       </el-main>

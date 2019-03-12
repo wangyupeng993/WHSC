@@ -18,12 +18,16 @@ h1,h2,h3,h4,h5{
 a{
   text-decoration:none;
 }
-
-.pagination-pos-bottom{
-  position:absolute;
-  bottom:0;
-  z-index:9999;
-  background-color:#fff;
+.el-list-header{
+  border-bottom:1px solid #eee;
+  line-height:60px;
+}
+.el-list-header div.el-breadcrumb{
+  font-size:16px;
+  line-height:60px;
+}
+.el-button > i.fas,.el-button > i.fab,.el-button > i.far{
+  margin-right:5px;
 }
 
 #app,.el-main{
@@ -32,6 +36,7 @@ a{
 .app-main{
   height:100%;
   overflow: auto;
+  padding-right:20px;
 }
 .el-scrollbar .el-scrollbar__wrap{
   overflow-y: scroll !important;
@@ -41,6 +46,10 @@ a{
   position: relative;
   height:93.7vh;
   padding:20px 0 20px 20px;
+}
+.el-main > div.el-scrollbar{
+  height:100% !important;
+  background-color:#fff !important;
 }
 
 .el-aside {

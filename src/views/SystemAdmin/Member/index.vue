@@ -1,7 +1,24 @@
 <template>
     <el-row id="member" v-loading.fullscreen.lock="Loading">
       <el-col :span="24">
-        <el-table :data="memberlist">
+        <el-row :gutter="10" class="el-list-header">
+          <el-col :span="18">
+            <el-breadcrumb>
+              <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+                {{item.meta.title}}
+              </el-breadcrumb-item>
+            </el-breadcrumb>
+          </el-col>
+          <el-col :span="4">
+            <el-input
+              v-model="searchNumber.merchant_id"
+              placeholder="请输入商家编号"/>
+          </el-col>
+          <el-col :span="2">
+            <el-button type="primary" @click="getmemberlist(searchNumber)" icon="el-icon-search">搜索</el-button>
+          </el-col>
+        </el-row>
+        <el-table :data="memberlist" stripe>
           <el-table-column type="expand">
             <template slot-scope="props">
               <el-form label-position="left" inline class="demo-table-expand">
@@ -51,18 +68,10 @@
               <span v-if="scope.row.merAuthStatus === '2'">拒绝</span>
             </template>
           </el-table-column>
-          <el-table-column allgn="right" width="300px">
-            <template slot="header" slot-scope="scope">
-              <div style="display:flex;">
-                <el-input
-                  style="min-width:140px;"
-                  v-model="searchNumber.merchant_id"
-                  placeholder="请输入商家编号"/>
-                <el-button type="primary" @click="getmemberlist(searchNumber)" size="mini" icon="el-icon-search">搜索</el-button>
-              </div>
-            </template>
+          <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button type="primary" @click="unlockbusiness(scope.$index,scope.row)">解锁</el-button>
+              <el-button type="primary" icon="fas fa-unlock-alt"
+                         @click="unlockbusiness(scope.$index,scope.row)">解锁</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -87,7 +96,6 @@ export default {
       rolelist: [],
       paging: {},
       search: '',
-      role: null,
       searchNumber: {
         token: getUserInfo('userinfo').token,
         merchant_id: '',
@@ -111,8 +119,10 @@ export default {
   async mounted () {
     await this.getmemberlist(this.searchNumber)
     await this.getRolequery({token: this.searchNumber.token})
+    console.log(this.$route)
   },
   methods: {
+    // 获取会员列表
     getmemberlist (query) {
       this.Loading = true
       service.getmemberAll(query)
@@ -127,6 +137,7 @@ export default {
           console.log(error)
         })
     },
+    // 获取角色列表
     getRolequery (query) {
       service.getRoleQuery(query)
         .then(respone => {
@@ -136,9 +147,11 @@ export default {
           console.log(error)
         })
     },
+    // 筛选角色
     getRoleName (roleid) {
       return this.rolelist.filter(item => item.id === Number(roleid))[0]
     },
+    // 解绑
     async unlockbusiness (index, row) {
       this.Loading = true
       await service.unlockbusiness({token: this.searchNumber.token, merchant_id: row.merchantId})
@@ -148,6 +161,7 @@ export default {
         })
       await this.getmemberlist(this.searchNumber)
     },
+    // 翻页查询
     handleSizeChange (page) {
       this.getmemberlist({...this.searchNumber, ...page})
     }
