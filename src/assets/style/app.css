@@ -18,6 +18,14 @@ h1,h2,h3,h4,h5{
 a{
   text-decoration:none;
 }
+
+.el-input__inner::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
+.el-input__inner::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+}
+
 .el-list-header{
   border-bottom:1px solid #eee;
   line-height:60px;

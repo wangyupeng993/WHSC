@@ -55,6 +55,27 @@ const service = {
       method: 'post',
       data
     })
+  },
+  changePermission: (data) => {
+    return request({
+      url: '/smartsystem/system/permission/add',
+      method: 'post',
+      data
+    })
+  },
+  deletePermission: (data) => {
+    return request({
+      url: '/smartsystem/system/permission/del',
+      method: 'post',
+      data
+    })
+  },
+  getRolelist: (data) => {
+    return request({
+      url: '/smartsystem/system/role/query',
+      method: 'post',
+      data
+    })
   }
 }
 export default service
