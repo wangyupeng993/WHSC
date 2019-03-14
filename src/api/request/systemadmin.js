@@ -56,6 +56,7 @@ const service = {
       data
     })
   },
+  // 新增修改权限
   changePermission: (data) => {
     return request({
       url: '/smartsystem/system/permission/add',
@@ -63,6 +64,7 @@ const service = {
       data
     })
   },
+  // 删除权限
   deletePermission: (data) => {
     return request({
       url: '/smartsystem/system/permission/del',
@@ -70,9 +72,42 @@ const service = {
       data
     })
   },
+  // 获取角色列表
   getRolelist: (data) => {
     return request({
       url: '/smartsystem/system/role/query',
+      method: 'post',
+      data
+    })
+  },
+  // 新增修改角色
+  changeRole: (data) => {
+    return request({
+      url: '/smartsystem/system/role/add',
+      method: 'post',
+      data
+    })
+  },
+  // 删除角色
+  deleteRole: (data) => {
+    return request({
+      url: '/smartsystem/system/role/del',
+      method: 'post',
+      data
+    })
+  },
+  // 查询角色权限配置
+  getRolePermission: (data) => {
+    return request({
+      url: '/smartsystem/system/rolePermission/query',
+      method: 'post',
+      data
+    })
+  },
+  // 提交修改权限
+  changeRolePermission: (data) => {
+    return request({
+      url: '/smartsystem/system/rolePermission/add',
       method: 'post',
       data
     })

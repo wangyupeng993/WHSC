@@ -141,7 +141,6 @@ export default {
       delete query.updateTime
       delete query.data
       delete query.checked
-      console.log(query)
       await service.changePermission({token: this.token, ...query})
         .then(respone => {
           this.popup = false
@@ -165,14 +164,13 @@ export default {
         order_id: row.orderId,
         parent_id: row.parentId
       }
-      row.parentId === 0 && row.parentId === parentnav.id ? this.popupTitle = `修改 ${parentnav.name} > ${row.name}` : this.popupTitle = `修改 ${parentnav.name}`
+      row.parentId !== 0 && row.parentId === parentnav.id ? this.popupTitle = `修改 ${parentnav.name} > ${row.name}` : this.popupTitle = `修改 ${parentnav.name}`
     },
     // 删除
     removepermission (index, row) {
       this.confirmpopup(`确认删除 ${row.name}?`, () => {
         service.deletePermission({token: this.token, id: row.id})
           .then(respone => {
-            console.log(respone)
             this.getPermission({token: this.token})
           })
           .catch(error => {

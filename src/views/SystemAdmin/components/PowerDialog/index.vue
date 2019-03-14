@@ -45,11 +45,12 @@ export default {
       }
     }
     const validatenumber = (rule, value, callback) => {
+      const isInteger = value.indexOf('.')
       if (this.item.order_id === '') {
         return callback(new Error('排序号不能为空且为数字！'))
       } else if (!Number(this.item.order_id)) {
         return callback(new Error('排序号必须为数字！'))
-      } else if (Number.isInteger(this.item.order_id)) {
+      } else if (isInteger !== -1) {
         return callback(new Error('排序号必须为整数！'))
       } else {
         callback()
