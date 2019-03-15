@@ -131,7 +131,6 @@ export default {
       this.limitDialog = true
       this.roleinfo = row
       this.limitTitle = `修改 ${row.name} 的权限`
-      console.log(index, row)
     },
     // 提交修改权限
     async handlechange (query) {

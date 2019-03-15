@@ -50,7 +50,7 @@
                   <span v-if="props.row.settlePeroid === 0"> d + {{props.row.settlePeroid}}</span>
                 </el-form-item>
                 <el-form-item label="角色">
-                  <span>{{getRoleName(props.row.identity).name}}</span>
+                  <span>{{props.row.identity|getRoleName(props.row.identity,rolelist)}}</span>
                 </el-form-item>
                 <el-form-item label="上级代理编号">
                   <span>{{props.row.parent}}</span>
@@ -87,6 +87,7 @@
 import service from '@/api/request/systemadmin'
 import {pagination} from '@/views/SystemAdmin/components'
 import {getUserInfo} from '@/api/sessionStorage'
+import {getRoleName} from '@/api/filters'
 export default {
   name: 'Member',
   data () {
@@ -116,6 +117,7 @@ export default {
       deep: true
     }
   },
+  filters: {getRoleName},
   async mounted () {
     await this.getmemberlist(this.searchNumber)
     await this.getRolequery({token: this.searchNumber.token})
@@ -146,10 +148,6 @@ export default {
         .catch(error => {
           console.log(error)
         })
-    },
-    // 筛选角色
-    getRoleName (roleid) {
-      return this.rolelist.filter(item => item.id === Number(roleid))[0]
     },
     // 解绑
     async unlockbusiness (index, row) {
