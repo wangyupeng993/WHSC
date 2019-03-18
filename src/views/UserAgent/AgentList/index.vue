@@ -19,7 +19,9 @@
                   <span>{{props.row.freezeAmount}}</span>
                 </el-form-item>
                 <el-form-item label="商户认证状态">
-                  <span>{{props.row.merAuthStatus}}</span>
+                  <span v-if="props.row.merAuthStatus === '0'">未认证</span>
+                  <span v-if="props.row.merAuthStatus === '1'">已认证</span>
+                  <span v-if="props.row.merAuthStatus === '2'">已拒绝</span>
                 </el-form-item>
                 <el-form-item label="上级代理编号">
                   <span>{{props.row.parent}}</span>
@@ -31,7 +33,8 @@
                   <span>{{props.row.loginId}}</span>
                 </el-form-item>
                 <el-form-item label="结算周期">
-                  <span>{{props.row.settlePeroid}}</span>
+                  <p v-if="props.row.settlePeroid >= 1">t+{{ props.row.settlePeroid}}</p>
+                  <p v-if="props.row.settlePeroid === 0">d+{{ props.row.settlePeroid}}</p>
                 </el-form-item>
                 <el-form-item label="创建日期">
                   <span>{{props.row.createTime}}</span>
@@ -41,12 +44,17 @@
           </el-table-column>
           <el-table-column prop="merchantName" label="商户名称"></el-table-column>
           <el-table-column prop="merAuthStatus" label="商户认证状态"></el-table-column>
-          <el-table-column prop="settlePeroid" label="结算周期"></el-table-column>
+          <el-table-column prop="settlePeroid" label="结算周期">
+            <template slot-scope="scope">
+              <p v-if="scope.row.settlePeroid >= 1">t+{{scope.row.settlePeroid}}</p>
+              <p v-if="scope.row.settlePeroid === 0">d+{{scope.row.settlePeroid}}</p>
+            </template>
+          </el-table-column>
           <el-table-column prop="createTime" label="创建日期"></el-table-column>
           <el-table-column label="操作" width="350px">
             <template slot-scope="scope">
               <el-button-group style="margin-bottom:10px;">
-                <el-button type="primary" size="mini">冻结</el-button>
+                <el-button @click="agentinfo = scope.row,frozenDialog = true" type="primary" size="mini">冻结</el-button>
                 <el-button type="primary" size="mini">费率</el-button>
                 <el-button type="primary" size="mini">通道</el-button>
               </el-button-group>
@@ -67,6 +75,11 @@
                     :pageSize.sync="paging.size"
                     @handle-change="handleSizeChange"
                     :total.sync="paging.totalElements"/>
+        <frozen-business v-if="frozenDialog"
+                         @handle-click="getRolequery({token: agentprop.token})"
+                         :visible.sync="frozenDialog"
+                         :agentinfo.sync="agentinfo"
+                         :token.sync="agentprop.token" />
       </el-col>
     </el-row>
 </template>
@@ -74,7 +87,7 @@
 <script>
 import service from '@/api/request/UserAgent'
 import {getUserInfo} from '@/api/sessionStorage'
-import {pagination, BusinessAccount} from '@/views/UserAgent/components'
+import {pagination, BusinessAccount, FrozenBusiness} from '@/views/UserAgent/components'
 import {getRoleName} from '@/api/filters'
 export default {
   name: 'AgentList',
@@ -82,7 +95,9 @@ export default {
     return {
       BusAgent: [],
       rolelist: [],
+      frozenDialog: false,
       paging: {},
+      agentinfo: null,
       agentprop: {
         merchant_id: '',
         mer_auth_status: 1,
@@ -91,7 +106,7 @@ export default {
       }
     }
   },
-  components: {pagination, BusinessAccount},
+  components: {pagination, BusinessAccount, FrozenBusiness},
   filters: {getRoleName},
   async created () {
     await this.getRolequery({token: this.agentprop.token})
@@ -120,6 +135,7 @@ export default {
           console.log(error)
         })
     },
+    // 翻页查询
     handleSizeChange (page) {
       this.getAgentAll({...this.agentprop, number: page.number, size: 5})
     }

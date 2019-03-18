@@ -10,7 +10,7 @@
       <el-dropdown @command="removeStorage" trigger="click">
         <div>
           <img :src="headImg" alt="头像" />
-          <span>用户名称</span>
+          <span>{{userName}}</span>
         </div>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command='退出'>退出</el-dropdown-item>
@@ -30,13 +30,16 @@
 
 <script>
 import {Sidebar, AppMain} from './components'
-import {removeStorage} from '@/api/sessionStorage'
+import {removeStorage, getUserInfo} from '@/api/sessionStorage'
 import headImg from '@/assets/images/user.png'
 
 export default {
   name: 'Layout',
   data () {
-    return {headImg}
+    return {
+      headImg,
+      userName: getUserInfo('userinfo').merchantName
+    }
   },
   components: {Sidebar, AppMain},
   computed: {
