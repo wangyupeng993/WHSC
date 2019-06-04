@@ -1,0 +1,100 @@
+
+/* 字体颜色 */
+.text-colour-red {
+  color: #e54d42;
+}
+.text-colour-orange {
+  color: #f37b1d;
+}
+.text-colour-yellow {
+  color: #fbbd08;
+}
+.text-colour-olive {
+  color: #8dc63f;
+}
+.text-colour-green {
+  color: #39b54a;
+}
+.text-colour-cyan {
+  color: #1cbbb4;
+}
+.text-colour-blue {
+  color: #0081ff;
+}
+.text-colour-purple {
+  color: #6739b6;
+}
+.text-colour-mauve {
+  color: #9c26b0;
+}
+.text-colour-pink {
+  color: #e03997;
+}
+.text-colour-brown {
+  color: #a5673f;
+}
+.text-colour-grey {
+  color: #8799a3;
+}
+.text-colour-darkGray {
+  color: #666666;
+}
+.text-colour-gray {
+  color: #aaaaaa;
+}
+.text-colour-ghostWhite {
+  color: #f1f1f1;
+}
+.text-colour-white {
+  color: #ffffff;
+}
+/* 背景颜色 */
+.bg-colour-red {
+  background-color: #e54d42;
+}
+.bg-colour-orange {
+  background-color: #f37b1d;
+}
+.bg-colour-yellow {
+  background-color: #fbbd08;
+}
+.bg-colour-olive {
+  background-color: #8dc63f;
+}
+.bg-colour-green {
+  background-color: #39b54a;
+}
+.bg-colour-cyan {
+  background-color: #1cbbb4;
+}
+.bg-colour-blue {
+  background-color: #0081ff;
+}
+.bg-colour-purple {
+  background-color: #6739b6;
+}
+.bg-colour-mauve {
+  background-color: #9c26b0;
+}
+.bg-colour-pink {
+  background-color: #e03997;
+}
+.bg-colour-brown {
+  background-color: #a5673f;
+}
+.bg-colour-grey {
+  background-color: #8799a3;
+}
+.bg-colour-darkGray {
+  background-color: #666666;
+}
+.bg-colour-gray {
+  background-color: #aaaaaa;
+}
+.bg-colour-ghostWhite {
+  background-color: #f1f1f1;
+}
+.bg-colour-white {
+  background-color: #ffffff;
+}
+/*# sourceMappingURL=colour.css.map */
